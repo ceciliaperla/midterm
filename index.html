@@ -89,12 +89,13 @@ const layer = new FeatureLayer({
 map.add(layer);
 
 // Create a GeoJSONLayer from a GeoJSON file
-  const geojsonLayer = new GeoJSONLayer({
-      url: "https://github.com/ceciliaperla/midterm/blob/26f94cd2efa8c29fd1a648d55b5489920dc38ec0/pharmacy_point.geojson"
-    });
+    const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
+      
+      const geojsonLayer = new GeoJSONLayer({
+        url: url
+      });
 
-    map.add(geojsonLayer);
-
+      map.add(geojsonLayer);
     });
 
         </script>
