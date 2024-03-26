@@ -92,7 +92,19 @@ map.add(layer);
     const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
       
       const geojsonLayer = new GeoJSONLayer({
-        url: url
+        url: url,
+        renderer: {
+    type: "unique-value",  // autocasts as new UniqueValueRenderer()
+    field: "name",  // replace with the name of the field to use for unique values
+    uniqueValueInfos: [
+      {
+        value: "CVS",  // replace with a unique value from the field
+        symbol: {
+          type: "picture-marker",  // Use "picture-marker" instead of "simple-marker"
+          url: "https://raw.githubusercontent.com/ceciliaperla/midterm/main/cvslogo.png",  // URL to your image
+          width: "48px",  // Width of the image
+          height: "48px"  // Height of the image
+        }
       });
 
       map.add(geojsonLayer);
