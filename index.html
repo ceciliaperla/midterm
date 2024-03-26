@@ -43,8 +43,8 @@
     <script src="https://js.arcgis.com/4.25/"></script>
 
         <script>
-        require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer"
- ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
+        require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer", "esri/layers/GeoJSONLayer"
+ ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, GeoJSONLayer) => {
             
             esriConfig.apiKey = "AAPK56419a6214b44ea4bcb814fec9ef171eVhAxzMstqNZOcF3t1U-exAFnYlWyzkQVYSOD8xzziKyHegsVdDZxaECBoXxisXR6";
 
@@ -88,6 +88,12 @@ const layer = new FeatureLayer({
 })
 map.add(layer);
 
+// Create a GeoJSONLayer from a GeoJSON file
+  const geojsonLayer = new GeoJSONLayer({
+      url: "https://github.com/ceciliaperla/midterm/blob/26f94cd2efa8c29fd1a648d55b5489920dc38ec0/pharmacy_point.geojson"
+    });
+
+    map.add(geojsonLayer);
 
     });
 
@@ -96,8 +102,6 @@ map.add(layer);
 
 </head>
     <body>
-      <!--       // survey not displaying correct title, will try to fix 
-      fixed on survey123-->
       <a href="https://arcg.is/18Cefe1"target="_blank" class="addRecordBtn">Add Record</a>
 
         <div id="viewDiv"></div>
