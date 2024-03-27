@@ -98,12 +98,48 @@ map.add(layer);
     field: "name",  // replace with the name of the field to use for unique values
     uniqueValueInfos: [
       {
-        value: "CVS",  // replace with a unique value from the field
+        value: "CVS",
         symbol: {
-          type: "picture-marker",  // Use "picture-marker" instead of "simple-marker"
-          url: "https://raw.githubusercontent.com/ceciliaperla/midterm/main/cvslogo.png",  // URL to your image
-          width: "48px",  // Width of the image
-          height: "48px"  // Height of the image
+          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+          style: "circle",
+          color: "blue",
+          size: "8px"
+        }
+      },
+      {
+        value: "Walgreens",
+        symbol: {
+          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+          style: "circle",
+          color: "red",
+          size: "8px"
+        }
+      },
+      {
+        value: "Walmart",
+        symbol: {
+          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+          style: "circle",
+          color: "green",
+          size: "8px"
+        }
+      },
+      {
+        value: "Publix",
+        symbol: {
+          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+          style: "circle",
+          color: "purple",
+          size: "8px"
+        }
+      },
+      {
+        value: "Independent",
+        symbol: {
+          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+          style: "circle",
+          color: "orange",
+          size: "8px"
         }
       });
 
