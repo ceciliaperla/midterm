@@ -92,58 +92,16 @@ map.add(layer);
       
       const geojsonLayer = new GeoJSONLayer({
         url: url,
-        renderer: {
-    type: "unique-value",  // autocasts as new UniqueValueRenderer()
-    field: "name",  // replace with the name of the field to use for unique values
-    uniqueValueInfos: [
-      {
-        value: "CVS",
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: "blue",
-          size: "8px"
-        }
-      },
-      {
-        value: "Walgreens",
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: "red",
-          size: "8px"
-        }
-      },
-      {
-        value: "Walmart",
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: "green",
-          size: "8px"
-        }
-      },
-      {
-        value: "Publix",
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: "purple",
-          size: "8px"
-        }
-      },
-      {
-        value: "Independent",
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          style: "circle",
-          color: "orange",
-          size: "8px"
-        }
-      },
-    ]
+  renderer: {
+    type: "simple",  // autocasts as new SimpleRenderer()
+    symbol: {
+      type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+      style: "circle",
+      color: "blue",
+      size: "8px"
+    }
   }
- });
+});
  
 
       map.add(geojsonLayer);
