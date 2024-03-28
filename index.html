@@ -92,7 +92,17 @@ map.add(layer);
     const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
       
       const geojsonLayer = new GeoJSONLayer({
-        url: url
+        url: url,
+        renderer: {  // Renderer definition
+          type: "simple",  // autocasts as new SimpleRenderer()
+          symbol: {  // Symbol definition
+            type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+            style: "circle",
+            color: "blue",
+            size: "8px"
+          }
+  }
+
       });
 
       map.add(geojsonLayer);
