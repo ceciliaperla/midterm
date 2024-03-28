@@ -189,10 +189,14 @@ map.add(layer);
         let closestDistance = Infinity;
         let closestPoint = null;
 
+        // Array of names to exclude
+        let excludeNames = ["CSV", "CVS", "Cvs", "CVS Pharmacy", "CVS pharmacy", "CVS/Pharmacy", "CVS/pharmacy", "Publix", "Publix groceries", "Publix Pharmacy", "Publix Pharmacy at Glade Crossing", "Target Pharmacy", "Sam's Club Pharmacy", "Walgreens", "walgreens", "WalGreen's", "Walgreens Apotheke", "Walgreens Pharmacy", "Wallgreens", "Walmart", "Walmart Neighborhood Market", "Walmart Pharmacy", "Walmart Supercenter", "Winn-Dixie", "Winn-Dixie Pharmacy"];
+
         // Loop through all other points
         for (let otherPoint of result.features) {
-          // Skip the selected point itself
-          if (otherPoint.attributes.OBJECTID !== feature.graphic.attributes.OBJECTID) {
+        // Skip the selected point itself and pharmacies in the excludeNames array
+        if (otherPoint.attributes.OBJECTID !== feature.graphic.attributes.OBJECTID &&
+            !excludeNames.includes(otherPoint.attributes.name)) {
             // Calculate the distance to the other point
             let distance = geometryEngine.distance(feature.graphic.geometry, otherPoint.geometry, "miles");
 
