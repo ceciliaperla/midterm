@@ -182,7 +182,7 @@ map.add(layer);
     content: function(feature) {
       // Query the layer for all other points
       return geojsonLayer.queryFeatures({
-        where: "name='Best Drugs'",  // This condition selects all features
+        where: "1=1",  // This condition selects all features
         returnGeometry: true,
         outFields: ["*"]
       }).then(function(result) {
