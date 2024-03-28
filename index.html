@@ -4,6 +4,7 @@
         <!-- meta for the browser to have mobile first design -->
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+ 
 
     <title> CIMPL-Corporate and Independently Owned Pharmacy Locator </title>
 
@@ -45,7 +46,7 @@
         require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer", "esri/layers/GeoJSONLayer"
  ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, GeoJSONLayer) => {
             
-            esriConfig.apiKey = "AAPK5b78707c34e54873ad5eef061c07fbcdNncc4dyJYxhuG5F1Ef7CF43KmBT9KBr3AGuX1H5tfGNGBUSpA6ckOUopAbp6_5s7";
+            esriConfig.apiKey = "AAPK56419a6214b44ea4bcb814fec9ef171eVhAxzMstqNZOcF3t1U-exAFnYlWyzkQVYSOD8xzziKyHegsVdDZxaECBoXxisXR6";
 
             const map = new Map({
             basemap: "satellite"
@@ -91,20 +92,11 @@ map.add(layer);
     const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
       
       const geojsonLayer = new GeoJSONLayer({
-        url: url,
-  renderer: {
-    type: "simple",  // autocasts as new SimpleRenderer()
-    symbol: {
-      type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-      style: "circle",
-      color: "blue",
-      size: "8px"
-    }
-  }
-});
- 
+        url: url
+      });
 
       map.add(geojsonLayer);
+    });
 
         </script>
     
