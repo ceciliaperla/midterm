@@ -84,7 +84,22 @@
 // Create featurelayer from feature service 
 const layer = new FeatureLayer({ 
   // URL to the service 
-   url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_b16781eee7944077be2600f7e6a68bdc_results/FeatureServer" //Your item URL Goes Here
+   url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_b16781eee7944077be2600f7e6a68bdc_results/FeatureServer",  //Your item URL Goes Here
+   renderer: {  // Renderer definition
+    type: "unique-value",  // autocasts as new SimpleRenderer()
+    field: "please_select_your_income_level",  // The field to use for the unique values
+  uniqueValueInfos: [
+    {
+      value: "0 to $11,600",  // The value of the 'type' field for the first type of features
+      symbol: {  // The symbol to use for the first type of features
+        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+        style: "circle",
+        color: "green",
+        size: "12px"
+      }
+    }
+  ]
+  }
 })
 map.add(layer);
 
