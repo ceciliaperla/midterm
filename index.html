@@ -43,8 +43,8 @@
     <script src="https://js.arcgis.com/4.25/"></script>
 
         <script>
-        require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer", "esri/layers/GeoJSONLayer"
- ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, GeoJSONLayer) => {
+        require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer", "esri/layers/GeoJSONLayer","esri/geometry/geometryEngine", "esri/geometry/Point" 
+ ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, GeoJSONLayer, geometryEngine, Point) => {
             
             esriConfig.apiKey = "AAPK56419a6214b44ea4bcb814fec9ef171eVhAxzMstqNZOcF3t1U-exAFnYlWyzkQVYSOD8xzziKyHegsVdDZxaECBoXxisXR6";
 
@@ -166,24 +166,57 @@ map.add(layer);
 // Create a GeoJSONLayer from a GeoJSON file
     const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
       
-      const geojsonLayer = new GeoJSONLayer({
-        url: url,
-        renderer: {  // Renderer definition
-          type: "simple",  // autocasts as new SimpleRenderer()
-          symbol: {  // Symbol definition
-            type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-            style: "circle",
-            color: "blue",
-            size: "8px"
-          }
-        },
+    const geojsonLayer = new GeoJSONLayer({
+  url: url,
+  renderer: {
+    type: "simple",
+    symbol: {
+      type: "simple-marker",
+      style: "circle",
+      color: "blue",
+      size: "8px"
+    }
+  },
+  popupTemplate: {
+    title: "{name}",
+    content: function(feature) {
+      // Query the layer for all other points
+      return geojsonLayer.queryFeatures({
+        where: "name='Best Drugs'",  // This condition selects all features
+        returnGeometry: true,
+        outFields: ["*"]
+      }).then(function(result) {
+        let closestDistance = Infinity;
+        let closestPoint = null;
 
-        popupTemplate: {  // Define a popup template
-            title: "{name}",
-            content: "<b>Address:</b>{addr_stree}<br>"
-          }
+        // Loop through all other points
+        for (let otherPoint of result.features) {
+          // Skip the selected point itself
+          if (otherPoint.attributes.OBJECTID !== feature.graphic.attributes.OBJECTID) {
+            // Calculate the distance to the other point
+            let distance = geometryEngine.distance(feature.graphic.geometry, otherPoint.geometry, "miles");
 
-   });
+            // If the distance is smaller than the current closest distance, update the closest distance and point
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestPoint = otherPoint;
+            }
+          }
+        }
+
+        // If a closest point is found, include its information in the popup
+        if (closestPoint) {
+          return "<b>Address:</b>" + feature.graphic.attributes.addr_stree +
+                 "<br><b>Closest Independent Pharmacy:</b>" + closestPoint.attributes.name +
+                 "<br><b>Distance:</b>" + closestDistance.toFixed(2) + " miles";
+        } else {
+          // If no closest point is found (which should not happen), just show the address
+          return "<b>Address:</b>" + feature.graphic.attributes.addr_stree;
+        }
+      });
+    }
+  }
+});
 
       map.add(geojsonLayer);
 
