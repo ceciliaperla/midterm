@@ -189,14 +189,21 @@ map.add(layer);
         let closestDistance = Infinity;
         let closestPoint = null;
 
-        // Array of names to exclude
-        let excludeNames = ["csv", "cvs", "cvs pharmacy", "cvs/pharmacy", "publix", "publix groceries", "publix pharmacy", "publix pharmacy at glade crossing", "target pharmacy", "sam's club pharmacy", "walgreens", "walgreens apotheke", "walgreens pharmacy", "wallgreens", "walmart", "walmart neighborhood market", "walmart pharmacy", "walmart supercenter", "winn-dixie", "winn-dixie pharmacy"];
+        function shouldExclude(name) {
+          // Array of names to exclude
+          let excludeNames = ["csv", "cvs", "cvs pharmacy", "cvs/pharmacy", "publix", "publix groceries", "publix pharmacy", "publix pharmacy at glade crossing", "target pharmacy", "sam's club pharmacy", "walgreens", "walgreens apotheke", "walgreens pharmacy", "wallgreens", "walmart", "walmart neighborhood market", "walmart pharmacy", "walmart supercenter", "winn-dixie", "winn-dixie pharmacy"];
 
+          // Convert the name to lower case and remove any extra spaces
+          let cleanedName = name.toLowerCase().trim();
+
+          // Check if the cleaned name is in the excludeNames array
+          return excludeNames.includes(cleanedName);
+        }
         // Loop through all other points
         for (let otherPoint of result.features) {
-        // Skip the selected point itself and pharmacies in the excludeNames array
+        // Skip the selected point itself and pharmacies that should be excluded
         if (otherPoint.attributes.OBJECTID !== feature.graphic.attributes.OBJECTID &&
-            !excludeNames.includes(otherPoint.attributes.name.toLowerCase())) {
+            !shouldExclude(otherPoint.attributes.name)) {
             // Calculate the distance to the other point
             let distance = geometryEngine.distance(feature.graphic.geometry, otherPoint.geometry, "miles");
 
