@@ -176,16 +176,18 @@ map.add(layer);
             color: "blue",
             size: "8px"
           },
-          popupTemplate: {  // autocasts as new PopupTemplate()
+        popupTemplate: {  // Define a popup template
             title: "{name}",
-            content: "Address: {addr_stree} <br> Phone: {phone} <br> Hours: {hours} <br> Website: {website}"
+            content: "<b>Address:</b>{addr_stree}<br>"
+          }
+
    }
-  }
-      });
+  });
 
       map.add(geojsonLayer);
+
+        });
     
-    });
 
         </script>
     
