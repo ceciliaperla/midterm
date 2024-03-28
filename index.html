@@ -100,7 +100,10 @@ map.add(layer);
             style: "circle",
             color: "blue",
             size: "8px"
-          }
+          },
+          popupTemplate: {  // autocasts as new PopupTemplate()
+            title: "{name}",
+            content: "Address: {address} <br> Phone: {phone} <br> Hours: {hours} <br> Website: {website}"
   }
 
       });
