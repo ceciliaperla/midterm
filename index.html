@@ -166,9 +166,8 @@ map.add(layer);
 // Create a GeoJSONLayer from a GeoJSON file
     const url = "https://raw.githubusercontent.com/ceciliaperla/midterm/main/pharmacy_point.geojson"; // Replace with your GeoJSON file URL
       
-    const geojsonLayer = new GeoJSONLayer({
-  url: url,
-  renderer: {
+
+  const renderer = {
     type: "unique-value",  // autocasts as new UniqueValueRenderer()
     field: "name",  // The field based on which the colors will be assigned
     defaultSymbol: { type: "simple-marker" },  // autocasts as new SimpleMarkerSymbol()
@@ -186,7 +185,7 @@ map.add(layer);
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "green"
         }
-      }
+      },
 
       {
         value: "Sam's Club Pharmacy",  // The value of the 'type' field for the second type of pharmacy
@@ -194,7 +193,7 @@ map.add(layer);
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "blue"
         }
-      }
+      },
 
       {
         value: "Target Pharmacy",  // The value of the 'type' field for the second type of pharmacy
@@ -202,7 +201,7 @@ map.add(layer);
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "purple"
         }
-      }
+      },
 
       {
         value: ["Walgreens", "WalGreen's", "Walgreens Apotheke", "Walgreens Pharmacy", "Wallgreens"],  // The value of the 'type' field for the second type of pharmacy
@@ -210,7 +209,7 @@ map.add(layer);
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "brown"
         }
-      }
+      },
 
       {
         value: ["Walmart", "Walmart Neighborhood Market", "Walmart Pharmacy", "Walmart Supercenter"],  // The value of the 'type' field for the second type of pharmacy
@@ -218,7 +217,7 @@ map.add(layer);
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "yellow"
         }
-      }
+      },
 
       {
         value: ["Winn-Dixie", "Winn-Dixie Pharmacy"],  // The value of the 'type' field for the second type of pharmacy
@@ -231,11 +230,11 @@ map.add(layer);
   ]
 };
 
-let geojsonLayer = new GeoJSONLayer({
+const geojsonLayer = new GeoJSONLayer({
   url: url,
-  renderer: renderer  // Add the renderer to the layer
+  renderer: renderer,  // Add the renderer to the layer
 });
-    }
+    
   },
   popupTemplate: {
     title: "{name}",
@@ -307,7 +306,7 @@ let geojsonLayer = new GeoJSONLayer({
       // Add the Legend to the MapView
       view.ui.add(legend, "bottom-right");  // You can change the position if you want
 
-        });
+      // Remove the extra closing curly braces
     
 
         </script>
