@@ -231,6 +231,22 @@ map.add(layer);
 
       map.add(geojsonLayer);
 
+  
+
+      // Create a Legend
+      let legend = new Legend({
+        view: view,
+        layerInfos: [
+          {
+            layer: geojsonLayer,
+            title: "Pharmacy Legend"  // Replace with the title you want to use
+          }
+        ]
+      });
+
+      // Add the Legend to the MapView
+      view.ui.add(legend, "bottom-right");  // You can change the position if you want
+
         });
     
 
