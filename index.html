@@ -352,9 +352,6 @@ map.add(layer);
 const geojsonLayer = new GeoJSONLayer({
   url: url,
   renderer: renderer,  // Add the renderer to the layer
-});
-    
-  },
   popupTemplate: {
     title: "name",
     content: function(feature) {
@@ -404,6 +401,7 @@ const geojsonLayer = new GeoJSONLayer({
         }
       });
     }
+  }
   });
       map.add(geojsonLayer);
 
