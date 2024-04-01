@@ -356,7 +356,7 @@ const geojsonLayer = new GeoJSONLayer({
     
   },
   popupTemplate: {
-    title: "{name}",
+    title: "name",
     content: function(feature) {
       // Query the layer for all other points
       return geojsonLayer.queryFeatures({
@@ -404,9 +404,7 @@ const geojsonLayer = new GeoJSONLayer({
         }
       });
     }
-  }
-});
-
+  });
       map.add(geojsonLayer);
 
   
