@@ -173,49 +173,49 @@ map.add(layer);
     defaultSymbol: { type: "simple-marker" },  // autocasts as new SimpleMarkerSymbol()
     uniqueValueInfos: [
       {
-        value: ["CSV"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CSV",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["Cvs"],  // The value of the 'type' field for the first type of pharmacy
+        value: "Cvs",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["CVS"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CVS",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["CVS pharmacy"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CVS pharmacy",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["CVS/pharmacy"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CVS/pharmacy",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["CVS Pharmacy"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CVS Pharmacy",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
         }
       },
       {
-        value: ["CVS/Pharmacy"],  // The value of the 'type' field for the first type of pharmacy
+        value: "CVS/Pharmacy",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "red"
@@ -331,7 +331,7 @@ map.add(layer);
       },
 
       {
-        value: ["Winn-Dixie"],  // The value of the 'type' field for the second type of pharmacy
+        value: "Winn-Dixie",  // The value of the 'type' field for the second type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "orange"
@@ -339,7 +339,7 @@ map.add(layer);
       },
 
       {
-        value: ["Winn-Dixie Pharmacy"],  // The value of the 'type' field for the second type of pharmacy
+        value: "Winn-Dixie Pharmacy",  // The value of the 'type' field for the second type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "orange"
@@ -420,11 +420,7 @@ const geojsonLayer = new GeoJSONLayer({
 
       // Add the Legend to the MapView
       view.ui.add(legend, "bottom-right");  // You can change the position if you want
-
-      // Remove the extra closing curly braces
-    
-
-        </script>
+     </script>
     
 
 </head>
