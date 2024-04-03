@@ -209,7 +209,7 @@ map.add(layer);
         // Repeat for other groups
         // ...
         // If none of the groups match, return a specific value for the "Other" category
-        return "Independent Pharmacy";
+        return "Other";
     `,
     valueExpressionTitle: "Pharmacy Type",
     defaultSymbol: { type: "simple-marker", color: "white"},  // autocasts as new SimpleMarkerSymbol()
@@ -266,13 +266,7 @@ map.add(layer);
           color: "orange"
         }
       },
-      {
-        value: "Independent Pharmacy",  // The value of the 'type' field for the second type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "white"
-        }
-      }
+
       
   ]
 };
