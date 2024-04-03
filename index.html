@@ -290,6 +290,7 @@ const geojsonLayer = new GeoJSONLayer({
         returnGeometry: true,
         outFields: ["*"]
       }).then(function(result) {
+        console.log(result);  // Log the result of the queryFeatures method
         let closestDistance = Infinity;
         let closestPoint = null;
 
@@ -318,6 +319,9 @@ const geojsonLayer = new GeoJSONLayer({
             }
           }
         }
+
+        // After the loop
+        console.log(closestDistance, closestPoint);  // Log the values of closestDistance and closestPoint
 
         // If a closest point is found, include its information in the popup
         if (closestPoint) {
