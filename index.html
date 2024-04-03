@@ -283,48 +283,35 @@ const geojsonLayer = new GeoJSONLayer({
   renderer: renderer,  // Add the renderer to the layer
   popupTemplate: {
     title: "{name}",
-    content: function(feature) {
-      // Query the layer for all other points
-      return geojsonLayer.queryFeatures({
-        where: "1=1",  // This condition selects all features
-        returnGeometry: true,
-        outFields: ["*"]
-      }).then(function(result) {
-        console.log(result);  // Log the result of the queryFeatures method
-        let closestDistance = Infinity;
-        let closestPoint = null;
-
-        // Loop through all other points
-        for (let otherPoint of result.features) {
-        // Skip the selected point itself and pharmacies that should be excluded
-        if (otherPoint.attributes.OBJECTID !== feature.graphic.attributes.OBJECTID &&
-            !shouldExclude(otherPoint.attributes.name)) {
-            // Calculate the distance to the other point
-            let distance = geometryEngine.distance(feature.graphic.geometry, otherPoint.geometry, "miles");
-
-            // If the distance is smaller than the current closest distance, update the closest distance and point
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestPoint = otherPoint;
+    content: [
+      {
+        type: "fields",
+        fieldInfos: [
+          {
+            fieldName: "address",
+            label: "Address",
+            format: {
+              places: 0
+            }
+          },
+          {
+            fieldName: "phone",
+            label: "Phone",
+            format: {
+              places: 0
+            }
+          },
+          {
+            fieldName: "type",
+            label: "Type",
+            format: {
+              places: 0
             }
           }
+          ]
         }
-
-        // After the loop
-        console.log(closestDistance, closestPoint);  // Log the values of closestDistance and closestPoint
-
-        // If a closest point is found, include its information in the popup
-        if (closestPoint) {
-          return "<b>Address:</b>" + feature.graphic.attributes.addr_stree +
-                 "<br><b>Closest Independent Pharmacy:</b>" + closestPoint.attributes.name +
-                 "<br><b>Distance:</b>" + closestDistance.toFixed(2) + " miles";
-        } else {
-          // If no closest point is found (which should not happen), just show the address
-          return "<b>Address:</b>" + feature.graphic.attributes.addr_stree;
-        }
-      });
+      ]
     }
-  }
   });
       map.add(geojsonLayer);
 
