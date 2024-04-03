@@ -170,22 +170,50 @@ map.add(layer);
   const renderer = {
     type: "unique-value",  // autocasts as new UniqueValueRenderer()
     field: "name",  // The field based on which the colors will be assigned
+    valueExpression: `
+        var names = ["CSV", "Cvs", "CVS", "CVS pharmacy", "CVS/pharmacy", "CVS Pharmacy", "CVS/Pharmacy"];
+        var i;
+        for (i = 0; i < names.length; i++) {
+            if ($feature.name == names[i]) {
+                return "CVS";
+            }
+        }
+        var names = ["Publix", "Publix groceries", "Publix Pharmacy", "Publix Pharmacy at Glade Crossing"];
+        var i;
+        for (i = 0; i < names.length; i++) {
+            if ($feature.name == names[i]) {
+                return "Publix";
+            }
+        }
+        var names = ["Walgreens", "Walgreens Apotheke", "Walgreens Pharmacy", "Wallgreens"];
+        var i;
+        for (i = 0; i < names.length; i++) {
+            if ($feature.name == names[i]) {
+                return "Walgreens";
+            }
+        }
+        var names = ["Walmart", "Walmart Neighborhood Market", "Walmart Pharmacy", "Walmart Supercenter"];
+        var i;
+        for (i = 0; i < names.length; i++) {
+            if ($feature.name == names[i]) {
+                return "Walmart";
+            }
+        }
+        var names = ["Winn-Dixie", "Winn-Dixie Pharmacy"];
+        var i;
+        for (i = 0; i < names.length; i++) {
+            if ($feature.name == names[i]) {
+                return "Winn-Dixie";
+            }
+        }
+        // Repeat for other groups
+        // ...
+        // If none of the groups match, return the original name
+        return $feature.name;
+    `,
+    valueExpressionTitle: "Pharmacy Type",
     defaultSymbol: { type: "simple-marker" },  // autocasts as new SimpleMarkerSymbol()
     uniqueValueInfos: [
-      {
-        value: "CSV",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
-      {
-        value: "Cvs",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
       {
         value: "CVS",  // The value of the 'type' field for the first type of pharmacy
         symbol: {
@@ -194,56 +222,7 @@ map.add(layer);
         }
       },
       {
-        value: "CVS pharmacy",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
-      {
-        value: "CVS/pharmacy",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
-      {
-        value: "CVS Pharmacy",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
-      {
-        value: "CVS/Pharmacy",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "red"
-        }
-      },
-      {
         value: "Publix",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "green"
-        }
-      },
-      {
-        value: "Publix groceries",  // The value of the 'type' field for the second type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "green"
-        }
-      },
-      {
-        value: "Publix Pharmacy",  // The value of the 'type' field for the third type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "green"
-        }
-      },
-      {
-        value: "Publix Pharmacy at Glade Crossing",  // The value of the 'type' field for the fourth type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "green"
@@ -273,57 +252,7 @@ map.add(layer);
         }
       },
       {
-        value: "WalGreen's",  // The value of the 'type' field for the second type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "gray"
-        }
-      },
-      {
-        value: "Walgreens Apotheke",  // The value of the 'type' field for the third type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "gray"
-        }
-      },
-      {
-        value: "Walgreens Pharmacy",  // The value of the 'type' field for the fourth type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "gray"
-        }
-      },
-      {
-        value: "Wallgreens",  // The value of the 'type' field for the fifth type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "gray"
-        }
-      },
-
-      {
         value: "Walmart",  // The value of the 'type' field for the first type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "yellow"
-        }
-      },
-      {
-        value: "Walmart Neighborhood Market",  // The value of the 'type' field for the second type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "yellow"
-        }
-      },
-      {
-        value: "Walmart Pharmacy",  // The value of the 'type' field for the third type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "yellow"
-        }
-      },
-      {
-        value: "Walmart Supercenter",  // The value of the 'type' field for the fourth type of pharmacy
         symbol: {
           type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
           color: "yellow"
@@ -337,14 +266,6 @@ map.add(layer);
           color: "orange"
         }
       },
-
-      {
-        value: "Winn-Dixie Pharmacy",  // The value of the 'type' field for the second type of pharmacy
-        symbol: {
-          type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-          color: "orange"
-        }
-      }
       
   ]
 };
