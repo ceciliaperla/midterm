@@ -283,27 +283,26 @@ const geojsonLayer = new GeoJSONLayer({
   renderer: renderer,  // Add the renderer to the layer
   popupTemplate: {
     title: "{name}",
-    content: [
-      {
-        type: "fields",
-        fieldInfos: [
-          {
-            fieldName: "addr_stree",
-            label: "Address",
-          },
-          {
-            fieldName: "phone",
-            label: "Phone",
-            format: {
-              places: 0
-            }
-          },
+    content: function(feature) {
+      // Get the address and phone from the attributes
+      let address = feature.graphic.attributes.addr_stree;
+      let phone = feature.graphic.attributes.phone;
 
-          ]
-        }
-      ]
+      // If the address is empty, use a default message
+      if (!address) {
+        address = "Address not available";
+      }
+
+      // If the phone is empty, use a default message
+      if (!phone) {
+        phone = "Phone not available";
+      }
+
+      // Return the content string
+      return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone;
     }
-  });
+  }
+});
       map.add(geojsonLayer);
 
   
