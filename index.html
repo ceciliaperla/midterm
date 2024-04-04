@@ -285,7 +285,7 @@ const geojsonLayer = new GeoJSONLayer({
     title: "{name}",
     content: function(feature) {
       // Get the address and phone from the attributes
-      let address = feature.graphic.attributes.addr_stree;
+      let address = feature.graphic.attributes["addr:street"];
       let phone = feature.graphic.attributes.phone;
 
       // If the address is empty, use a default message
