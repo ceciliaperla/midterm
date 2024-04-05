@@ -289,12 +289,10 @@ const geojsonLayer = new GeoJSONLayer({
     let clickedLatitude = feature.graphic.geometry.y;
     console.log("Coordinates: " + clickedLatitude + ", " + clickedLongitude);
 
-    // Display the coordinates of the clicked point in the popup
-    view.popup.content = "<b>Coordinates:</b> " + clickedLatitude + ", " + clickedLongitude;
       // Define a spatial query
       let query = geojsonLayer.createQuery();
       query.geometry = feature.graphic.geometry;  // Use the clicked point as the query geometry
-      query.distance = 100;  // Search within a radius of 10000 meters
+      query.distance = 100;  // Search within a radius of 100 miles
       query.units = "miles";
       query.returnGeometry = true;  // Return the geometry of the found features
       
@@ -328,9 +326,10 @@ const geojsonLayer = new GeoJSONLayer({
             console.log("Nearest pharmacy coordinates: " + latitude + ", " + longitude);
 
             // Update the popup content
-            view.popup.content = "<b>Nearest Independent Pharmacy Coordinates:</b> " + latitude + ", " + longitude;
-          }
-        })
+            view.popup.content = "<b>Coordinates:</b> " + clickedLatitude + ", " + clickedLongitude + "<br><b>Nearest Independent Pharmacy Coordinates:</b> " + latitude + ", " + longitude;
+      }
+    })
+        
         .catch(function(error) {
           console.error("Error executing query: ", error);
         });
