@@ -321,7 +321,7 @@ const geojsonLayer = new GeoJSONLayer({
           let nearestFeature = null;
           let minDistance = Infinity;
           for (let feature of results.features) {
-            let distance = geometryEngine.distance(query.geometry, feature.geometry, "meters");
+            let distance = geometryEngine.distance(query.geometry, feature.geometry, "miles");
             if (distance < minDistance) {
               minDistance = distance;
               nearestFeature = feature;
@@ -333,14 +333,16 @@ const geojsonLayer = new GeoJSONLayer({
             let longitude = nearestFeature.geometry.x;
             let latitude = nearestFeature.geometry.y;
             console.log("Nearest point coordinates: " + longitude + ", " + latitude);
+
+            // Return the content string
+            return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
           }
         })
         .catch(function(error) {
           console.error("Error executing query: ", error);
         });
 
-      // Return the content string
-      return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
+
     }
   }
 });
