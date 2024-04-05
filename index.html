@@ -303,6 +303,42 @@ const geojsonLayer = new GeoJSONLayer({
         phone = "Phone not available";
       }
 
+      // Define a spatial query
+      let query = geojsonLayer.createQuery();
+      query.geometry = feature.graphic.geometry;  // Use the clicked point as the query geometry
+      query.distance = 100;  // Search within a radius of 10000 meters
+      query.units = "miles";
+      query.returnGeometry = true;  // Return the geometry of the found features
+
+      // Exclude the clicked feature
+      let id = feature.graphic.attributes.id;  // Replace 'id' with the name of your unique identifier field
+      query.where = "id <> " + id;  // Replace 'id' with the name of your unique identifier field
+
+      // Execute the query
+      geojsonLayer.queryFeatures(query)
+        .then(function(results) {
+          // Find the nearest feature
+          let nearestFeature = null;
+          let minDistance = Infinity;
+          for (let feature of results.features) {
+            let distance = geometryEngine.distance(query.geometry, feature.geometry, "meters");
+            if (distance < minDistance) {
+              minDistance = distance;
+              nearestFeature = feature;
+            }
+          }
+
+          // Display the coordinates of the nearest feature
+          if (nearestFeature) {
+            let longitude = nearestFeature.geometry.x;
+            let latitude = nearestFeature.geometry.y;
+            console.log("Nearest point coordinates: " + longitude + ", " + latitude);
+          }
+        })
+        .catch(function(error) {
+          console.error("Error executing query: ", error);
+        });
+
       // Return the content string
       return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
     }
