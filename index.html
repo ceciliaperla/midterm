@@ -284,6 +284,13 @@ const geojsonLayer = new GeoJSONLayer({
   popupTemplate: {
     title: "{name}",
     content: function(feature) {
+    // Get the coordinates of the clicked point
+    let clickedLongitude = feature.graphic.geometry.x;
+    let clickedLatitude = feature.graphic.geometry.y;
+    console.log("Coordinates: " + clickedLatitude + ", " + clickedLongitude);
+
+    // Display the coordinates of the clicked point in the popup
+    view.popup.content = "<b>Coordinates:</b> " + clickedLatitude + ", " + clickedLongitude;
       // Define a spatial query
       let query = geojsonLayer.createQuery();
       query.geometry = feature.graphic.geometry;  // Use the clicked point as the query geometry
