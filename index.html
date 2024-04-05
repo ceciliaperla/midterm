@@ -288,6 +288,11 @@ const geojsonLayer = new GeoJSONLayer({
       let address = feature.graphic.attributes["addr:street"];
       let phone = feature.graphic.attributes.phone;
 
+      // Get the coordinates from the geometry
+      let coordinates = feature.graphic.geometry;
+      let longitude = coordinates.x;
+      let latitude = coordinates.y;
+
       // If the address is empty, use a default message
       if (!address) {
         address = "Address not available";
@@ -299,7 +304,7 @@ const geojsonLayer = new GeoJSONLayer({
       }
 
       // Return the content string
-      return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone;
+      return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
     }
   }
 });
