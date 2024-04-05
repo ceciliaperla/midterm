@@ -284,66 +284,16 @@ const geojsonLayer = new GeoJSONLayer({
   popupTemplate: {
     title: "{name}",
     content: function(feature) {
-      // Get the address and phone from the attributes
-      let address = feature.graphic.attributes["addr:street"];
-      let phone = feature.graphic.attributes.phone;
+    // Get the coordinates from the geometry
+    let coordinates = feature.graphic.geometry;
+    let longitude = coordinates.x;
+    let latitude = coordinates.y;
 
-      // Get the coordinates from the geometry
-      let coordinates = feature.graphic.geometry;
-      let longitude = coordinates.x;
-      let latitude = coordinates.y;
-
-      // If the address is empty, use a default message
-      if (!address) {
-        address = "Address not available";
-      }
-
-      // If the phone is empty, use a default message
-      if (!phone) {
-        phone = "Phone not available";
-      }
-      // Define a spatial query
-    let query = geojsonLayer.createQuery();
-    query.geometry = feature.graphic.geometry;  // Use the clicked point as the query geometry
-    query.distance = 100;  // Search within a radius of 10000 meters
-    query.units = "miles";
-    query.returnGeometry = true;  // Return the geometry of the found features
-
-    // Exclude the clicked feature and only include independent pharmacies
-    let id = feature.graphic.attributes.geometry;  // Replace 'id' with the name of your unique identifier field
-    query.where = "geometry <> " + geometry;  // Replace 'is_independent' with the name of your field that indicates whether a pharmacy is independent
-
-    // Execute the query
-    geojsonLayer.queryFeatures(query)
-      .then(function(results) {
-        // Find the nearest feature
-        let nearestFeature = null;
-        let minDistance = Infinity;
-        for (let feature of results.features) {
-          let distance = geometryEngine.distance(query.geometry, feature.geometry, "miles");
-          if (distance < minDistance) {
-            minDistance = distance;
-            nearestFeature = feature;
-          }
-        }
-
-        // Display the name of the nearest feature
-        if (nearestFeature) {
-          let name = nearestFeature.attributes.name;
-          console.log("Nearest independent pharmacy: " + name);
-
-          // Update the popup content
-          view.popup.content = "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude + "<br><b>Nearest independent pharmacy:</b> " + name;
-        }
-      })
-      .catch(function(error) {
-        console.error("Error executing query: ", error);
-      });
-
-    // Return a loading message
-    return "Loading...";
-        }
-      }
+    // Return the coordinates
+    return "<b>Coordinates:</b> " + longitude + ", " + latitude;
+  }
+}
+    
 
 });
       map.add(geojsonLayer);
