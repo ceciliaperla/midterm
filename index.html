@@ -334,14 +334,16 @@ const geojsonLayer = new GeoJSONLayer({
             let latitude = nearestFeature.geometry.y;
             console.log("Nearest point coordinates: " + longitude + ", " + latitude);
 
-            // Return the content string
-            return "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
+         // Update the popup content
+          view.popup.content = "<b>Address:</b> " + address + "<br><b>Phone:</b> " + phone + "<br><b>Coordinates:</b> " + longitude + ", " + latitude;
           }
         })
         .catch(function(error) {
           console.error("Error executing query: ", error);
         });
-
+      
+        // Return a loading message
+      return "Loading...";
 
     }
   }
