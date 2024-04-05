@@ -318,10 +318,10 @@ const geojsonLayer = new GeoJSONLayer({
           if (nearestFeature) {
             let longitude = nearestFeature.geometry.x;
             let latitude = nearestFeature.geometry.y;
-            console.log("Nearest pharmacy coordinates: " + longitude + ", " + latitude);
+            console.log("Nearest pharmacy coordinates: " + latitude + ", " + longitude);
 
             // Update the popup content
-            view.popup.content = "<b>Nearest Independent Pharmacy Coordinates:</b> " + longitude + ", " + latitude;
+            view.popup.content = "<b>Nearest Independent Pharmacy Coordinates:</b> " + latitude + ", " + longitude;
           }
         })
         .catch(function(error) {
